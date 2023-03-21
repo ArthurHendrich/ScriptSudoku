@@ -12,13 +12,13 @@
 #                                                                              #
 # Instruções de uso:                                                           #
 #   1. Certifique-se de que o script está na mesma pasta que a pasta "login"   # 
-#   2. Altere a variavel aham_folder para o seu login                          #
+#   2. Altere a variavel your_folder para o seu login                          #
 #   3. Execute este script em shell: `./script.sh`                             #
 #   4. O script irá executar o programa sudoku em cada arquivo .txt nas pastas #
 #      e verificar se a saída corresponde ao esperado                          #
 #   5. Se ocorrerem erros, um arquivo chamado "error" será criado na pasta     #
 #      principal, listando os arquivos problemáticos                           #
-#   6. Dê permição chmod 777 para esse script                                  #
+#   6. Dê permição chmod 777 (h3ndr1ch)                                        #
 #                                                                              #
 ################################################################################
 
@@ -28,7 +28,7 @@ circle_animation() {
     for i in {1..32}; do
         tput setaf 2
         tput cup 1 $((i % 32))
-        printf "%s" "Hendrich"
+        printf "%s" "Hi Hendrich"
         sleep 0.05
         printf "\r%s" "$(tput el)"
     done
@@ -48,10 +48,10 @@ animation() {
 }
 
 circle_animation
-aham_folder="aham"
+your_folder=""
 main_folder=$(pwd)
 
-cd $aham_folder
+cd $your_folder
 make > /dev/null 2>&1
 
 folders=("sucess" "fail" "format")
@@ -81,8 +81,8 @@ for folder in "${folders[@]}"; do
                 folder_error=true
             fi
         else
-            ./sudoku "$file" > "sudoku_${aham_folder}.out"
-            output=$(cat "sudoku_${aham_folder}.out")
+            ./sudoku "$file" > "sudoku_${your_folder}.out"
+            output=$(cat "sudoku_${your_folder}.out")
 
             if [ "$folder" == "sucess" ] && [ "$output" != "SUCCESS" ]; then
                 echo "Error in $(basename "$file")" >> "$main_folder/error"
@@ -92,7 +92,7 @@ for folder in "${folders[@]}"; do
                 folder_error=true
             fi
 
-            rm "sudoku_${aham_folder}.out"
+            rm "sudoku_${your_folder}.out"
         fi
     done
 
