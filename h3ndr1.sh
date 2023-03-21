@@ -48,7 +48,7 @@ animation() {
 }
 
 circle_animation
-your_folder=""
+your_folder="aham"
 main_folder=$(pwd)
 
 cd $your_folder
