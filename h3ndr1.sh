@@ -73,7 +73,13 @@ for folder in "${folders[@]}"; do
         animation "Processing: $(basename "$file")"
 
         if [ "$folder" == "format" ]; then
-            ./sudoku "$file" > /dev/null 2>&1
+            ./sudoku "$file" > "sudoku_format.out"
+            if grep -q "File out of format" "sudoku_format.out"; then
+                continue
+            else
+                echo "Error in $(basename "$file")" >> "$main_folder/error"
+                folder_error=true
+            fi
         else
             ./sudoku "$file" > "sudoku_${aham_folder}.out"
             output=$(cat "sudoku_${aham_folder}.out")
