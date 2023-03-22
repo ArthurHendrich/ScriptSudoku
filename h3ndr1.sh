@@ -60,6 +60,8 @@ if [ -f "$main_folder/error" ]; then
     rm "$main_folder/error"
 fi
 
+declare -A folder_errors
+
 for folder in "${folders[@]}"; do
     tput setaf 5
     printf "Processing folder: "
@@ -78,6 +80,7 @@ for folder in "${folders[@]}"; do
                 continue
             else
                 echo "Error in $(basename "$file")" >> "$main_folder/error"
+                folder_errors["$folder"]+="$(basename "$file")"$'\n'
                 folder_error=true
             fi
         else
@@ -86,9 +89,11 @@ for folder in "${folders[@]}"; do
 
             if [ "$folder" == "sucess" ] && [ "$output" != "SUCCESS" ]; then
                 echo "Error in $(basename "$file")" >> "$main_folder/error"
+                folder_errors["$folder"]+="$(basename "$file")"$'\n'
                 folder_error=true
             elif [ "$folder" == "fail" ] && [ "$output" != "FAIL" ]; then
                 echo "Error in $(basename "$file")" >> "$main_folder/error"
+                folder_errors["$folder"]+="$(basename "$file")"$'\n'
                 folder_error=true
             fi
 
@@ -111,10 +116,17 @@ done
 
 cd "$main_folder"
 
-if [ -f "error" ]; then
-    echo "Errors found:"
-    cat "error"
-else
+errors_found=false
+
+for folder in "${folders[@]}"; do
+    if [ -n "${folder_errors["$folder"]}" ]; then
+        errors_found=true
+        echo "Pasta $folder:"
+        echo "${folder_errors["$folder"]}"
+    fi
+done
+
+if [ "$errors_found" = false ]; then
     tput setaf 2
     printf "\n "
     tput setaf 10
