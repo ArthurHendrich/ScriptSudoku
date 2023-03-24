@@ -2,23 +2,23 @@
 
 ################################################################################
 #                                                                              #
-# Este script foi criado para executar testes em arquivos em diferentes        #
-# pastas com o programa sudoku.                                                #
+# This script was created to run tests on files in different fodlers           #
+# with the sudoku program.                                                     #
 #                                                                              #
-# Pastas:                                                                      #
-#   - sucess: os testes nesta pasta devem resultar em "SUCCESS"                #
-#   - fail: os testes nesta pasta devem resultar em "FAIL"                     #
-#   - format: os testes nesta pasta não devem gerar um arquivo de saída        #
+# Folders:                                                                     #
+#   - sucess: tests in this folder should result in "SUCESS"                   #
+#   - fail: tests in this folder should result in "FAIL"                       #
+#   - format: tests in this folder should not generate an output file          #
 #                                                                              #
 # Instruções de uso:                                                           #
-#   1. Certifique-se de que o script está na mesma pasta que a pasta "login"   # 
-#   2. Altere a variavel your_folder para o seu login                          #
-#   3. Execute este script em shell: `./script.sh`                             #
-#   4. O script irá executar o programa sudoku em cada arquivo .txt nas pastas #
-#      e verificar se a saída corresponde ao esperado                          #
-#   5. Se ocorrerem erros, um arquivo chamado "error" será criado na pasta     #
-#      principal, listando os arquivos problemáticos                           #
-#   6. Dê permição chmod 777 (h3ndr1ch)                                        #
+#   1. Make sure the script is in the same folder as the "login" folder        # 
+#   2. Change the your_folder variable to your "login"                         #
+#   3. Run this script in shell: "./script.sh"                                 #
+#   4. The script will execute the sudoku program on each .txt file in         #
+#      the folders and will check if the output matches                        #
+#   5. If errors occur, a file named "error" will be created in the main       #
+#      folder, listing the problematic files                                   #
+#   6. Grant permission: chmod 777 h3ndr1.sh                                   #
 #                                                                              #
 ################################################################################
 
@@ -87,7 +87,7 @@ for folder in "${folders[@]}"; do
             ./sudoku "$file" > "sudoku_${your_folder}.out"
             output=$(cat "sudoku_${your_folder}.out")
 
-            if [ "$folder" == "sucess" ] && [ "$output" != "SUCCESS" ]; then
+            if [ "$folder" == "sucess" ] && [ "$output" != "SUCESS" ]; then
                 echo "Error in $(basename "$file")" >> "$main_folder/error"
                 folder_errors["$folder"]+="$(basename "$file")"$'\n'
                 folder_error=true
@@ -102,7 +102,7 @@ for folder in "${folders[@]}"; do
     done
 
     if [ "$folder_error" = true ]; then
-        printf "\033[0;34m%s:\033[0m " "Processed $folder" # Azul escuro
+        printf "\033[0;34m%s:\033[0m " "Processed $folder" # Dark blue
         tput setaf 1
         printf "✘\n"
         tput sgr0
