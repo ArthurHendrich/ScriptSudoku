@@ -23,5 +23,3 @@ It seems that you need to have your Sudoku program written in the C programming 
 2. Create a Makefile in the same directory as your C source file. The Makefile should contain the necessary rules to compile your C program. In this reposityre has an example.
 3. Make sure the script, the "login" folder, and the Makefile are in the same directory.
 4. Now, you can follow the instructions provided in the previous response to run the script.sh file. The script will use the Makefile to compile your C program and perform the necessary tests on the .txt files in the specified folders.
-
-
