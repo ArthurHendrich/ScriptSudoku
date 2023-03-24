@@ -10,7 +10,7 @@
 #   - fail: tests in this folder should result in "FAIL"                       #
 #   - format: tests in this folder should not generate an output file          #
 #                                                                              #
-# Instruções de uso:                                                           #
+# Unstructions for use:                                                        #
 #   1. Make sure the script is in the same folder as the "login" folder        # 
 #   2. Change the your_folder variable to your "login"                         #
 #   3. Run this script in shell: "./script.sh"                                 #
